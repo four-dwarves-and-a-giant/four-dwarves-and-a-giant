@@ -1,0 +1,65 @@
+Class notes 04.01.25
+
+In order to create anonymous classes/objects you have to have an interface
+
+
+This is the lambda syntax / lambda function 
+	AnotherDemo.java
+
+
+in order to do what we did, the anonymous type has one method, it is then a function
+
+
+
+
+lab testing part 2
+
+Good List
+	Using adapter pattern
+	To match interface methods of our IndexUnsortedList to a known good list
+	
+	Until we get to Iterator stuff, but don't worry about it until the future
+
+	Should pass most tests
+
+	Use this list to confirm the test is right
+
+
+Bad List
+	Bad list should fail most tests
+
+
+ListTester
+	Line 286 onwards starts the Scenarios
+
+	Each scenario has a method and a lambda expression assigned to a variable
+
+RunTests() - we will spend a lot of time in over these labs
+
+NewList()
+
+// list = newList();
+// list.add(ELEMENT_A)
+
+
+End result is list with just A in it (scenario 2 or 3?) and then just call into the method above to get us to our initial state
+
+call method to get us to an initial point, call method to test / add to front rear etc. / then return list
+
+
+
+
+
+
+
+
+How does this thing actually get tested? It's in the runTests()
+
+the test cases exactly match the ListTest.txt ones
+
+
+test two element list
+letter = contents of the array
+	dont hardcode a "B" or an "A", "Z", etc.
+
+don't worry about anything below the iterators
