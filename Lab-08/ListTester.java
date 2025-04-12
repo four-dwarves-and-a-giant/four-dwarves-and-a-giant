@@ -181,7 +181,7 @@ public class ListTester {
 			
 		//1-element to empty list
 			// Scenario: 12
-		testSingleElementList(A_removeFirst_0, "A_removeFirst_0", LIST_A, STRING_A);
+		testEmptyList(A_removeFirst_0, "A_removeFirst_0");
 			// Scenario: 13
 
 			// Scenario: 14
