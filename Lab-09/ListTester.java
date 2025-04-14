@@ -174,19 +174,19 @@ public class ListTester {
 		testSingleElementList(emptyList_addToFrontA_A, "emptyList_addToFrontA_A", LIST_A, STRING_A);
 			// Scenario: 03
 		testSingleElementList(emptyList_addToRearA_A, "emptyList_AddToFrontA_A", LIST_A, STRING_A);
-			// Scenario: 04
+			// Scenario: 04 @Bombzone
 
-			// Scenario: 05
+			// Scenario: 05 @Bombzone
 
 			
 		//1-element to empty list
 			// Scenario: 12
 		testEmptyList(A_removeFirst_0, "A_removeFirst_0");
-			// Scenario: 13
+			// Scenario: 13 @groundbeef-java
 
 			// Scenario: 14
 		testEmptyList(A_removeA, "A_removeA");
-			// Scenario: 15
+			// Scenario: 15 @groundbeef-java
 
 			// Scenario: 44
 
@@ -209,13 +209,13 @@ public class ListTester {
 
 			
 		//2-element to 1-element
-			// Scenario: 25
+			// Scenario: 25 @QuirtTheDirt
 
 			// Scenario: 26
 		testSingleElementList(AB_removeLast_A, "AB_removeLast_A", LIST_A, STRING_A);
 			// Scenario: 27
 
-			// Scenario: 28
+			// Scenario: 28 @QuirtTheDirt
 
 			// Scenario: 29
 
@@ -227,9 +227,9 @@ public class ListTester {
 
 			
 		//2-element to 3-element
-			// Scenario: 17
+			// Scenario: 17 @danielstarcate2
 
-			// Scenario: 20 
+			// Scenario: 20 @danielstarcate2
 
 			// Scenario: 23
 
@@ -345,10 +345,11 @@ public class ListTester {
 
 	/** Scenario #04: [] -> add(A) -> [A] 
 	 * @return [A] after add(A)
+	 * @Bombzone
 	 */
 
 	/** Scenario #05: [] -> add(0, A) -> [A] 
-	 * @return [A] after add(0, A)
+	 * @return [A] after add(0, A) @Bombzone
 	 */
 
 	/** Scenario #06: [A] -> addToFront(B) -> [B,A] 
@@ -396,6 +397,7 @@ public class ListTester {
 
 	/** Scenario #13: [A] -> removeLast() -> [] 
 	 * @return [] after removeLast()
+	 * @groundbeef-java
 	 */
 
 	/** Scenario #14: [A] -> remove(A) -> []
@@ -411,6 +413,7 @@ public class ListTester {
 
 	/** Scenario #15: [A] -> remove(0) -> [] 
 	 * @return [] after remove(0)
+	 * @groundbeef-java
 	 */
 
 	 
@@ -420,12 +423,14 @@ public class ListTester {
 
 	 
 	/** Scenario #17: [A,B] -> addToFront(C) -> [C,A,B] 
-	 * @return [C,A,B] after addToFront(C)
+	 * @return [C,A,B] after addToFront(C) 
+	 * @danielstarcate2
 	 */
 
 	 
 	/** Scenario #20: [A,B] -> addAfter(C,B) -> [A,B,C] 
-	 * @return [A,B,C] after addAfter(C,B)
+	 * @return [A,B,C] after addAfter(C,B) 
+	 * @danielstarcate2
 	 */
 
 	 
@@ -436,6 +441,7 @@ public class ListTester {
 	 
 	/** Scenario #25: [A,B] -> removeFirst() -> [B]
 	 * @return [B] after removeFirst()
+	 * @QuirtTheDirt
 	 */
 
 	 
@@ -459,6 +465,7 @@ public class ListTester {
 	 
 	/** Scenario #28: [A,B] -> remove(B) -> [A]
 	 * @return [A] after remove(B)
+	 * @QuirtTheDirt
 	 */
 
 	 
