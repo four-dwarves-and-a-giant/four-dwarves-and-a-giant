@@ -38,45 +38,45 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 
 	@Override
 	public void addToFront(E element) {
-		// TODO 
+		// TODO @Faithewing315
 		modCount++; // DO NOT REMOVE ME
 		
 	}
 
 	@Override
 	public void addToRear(E element) {
-		// TODO 
+		// TODO @Faithewing315
 		modCount++; // DO NOT REMOVE ME
 	}
 
 	@Override
 	public void add(E element) {
-		// TODO 
+		// TODO @Faithewing315
 		modCount++; // DO NOT REMOVE ME
 	}
 
 	@Override
 	public void addAfter(E element, E target) {
-		// TODO 
+		// TODO @QuirtTheDirt
 		modCount++; // DO NOT REMOVE ME
 	}
 
 	@Override
 	public void add(int index, E element) {
-		// TODO 
+		// TODO @QuirtTheDirt
 		modCount++; // DO NOT REMOVE ME
 	}
 
 	@Override
 	public E removeFirst() {
-		// TODO 
+		// TODO @QuirtTheDirt
 		modCount++; // DO NOT REMOVE ME
 		return null;
 	}
 
 	@Override
 	public E removeLast() {
-		// TODO 
+		// TODO @Bombzone
 		modCount++; // DO NOT REMOVE ME
 		return null;
 	}
@@ -103,20 +103,20 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 
 	@Override
 	public E remove(int index) {
-		// TODO 
+		// TODO @Bombzone
 		modCount++; // DO NOT REMOVE ME
 		return null;
 	}
 
 	@Override
 	public void set(int index, E element) {
-		// TODO 
+		// TODO @Bombzone
 		modCount++; // DO NOT REMOVE ME
 	}
 
 	@Override
 	public E get(int index) {
-		// TODO 
+		// TODO @groundbeef-java
 		return null;
 	}
 
@@ -140,13 +140,13 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 
 	@Override
 	public E first() {
-		// TODO 
+		// TODO @groundbeef-java
 		return null;
 	}
 
 	@Override
 	public E last() {
-		// TODO 
+		// TODO @groundbeef-java
 		return null;
 	}
 
@@ -157,20 +157,20 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO 
+		// TODO @danielstarcate2
 		return false;
 	}
 
 	@Override
 	public int size() {
-		// TODO 
+		// TODO @danielstarcate2
 		return 0;
 	}
 
 	@Override
 	public String toString() {
 		String result = "[";
-		// TODO
+		// TODO @danielstarcate2
 		return result + "]";
 	}
 
