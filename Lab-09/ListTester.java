@@ -19,7 +19,7 @@ public class ListTester {
 		goodList, badList, arrayList, singleLinkedList, doubleLinkedList
 	};
 	// TODO: THIS IS WHERE YOU CHOOSE WHICH LIST TO TEST
-	private final static ListToUse LIST_TO_USE = ListToUse.goodList;
+	private final static ListToUse LIST_TO_USE = ListToUse.arrayList;
 
 	// possible results expected in tests
 	private enum Result {
@@ -228,9 +228,9 @@ public class ListTester {
 			
 		//2-element to 3-element
 			// Scenario: 17 @danielstarcate2
-
+		testThreeElementList(AB_addToFrontC_CAB, "AB_addToFrontC_CAB", LIST_CAB, STRING_CAB);
 			// Scenario: 20 @danielstarcate2
-
+		testThreeElementList(AB_addAfterCB_ABC, "AB_addAfterCB_ABC", LIST_ABC, STRING_ABC);
 			// Scenario: 23
 
 			
@@ -301,9 +301,9 @@ public class ListTester {
 		case badList:
 			listToUse = new BadList<Integer>();
 			break;
-		// case arrayList:
-		// 	listToUse = new IUArrayList<Integer>();
-		// 	break;
+		case arrayList:
+			listToUse = new IUArrayList<Integer>();
+			break;
 		// case singleLinkedList:
 		// 	listToUse = new IUSingleLinkedList<Integer>();
 		// 	break;
@@ -389,7 +389,7 @@ public class ListTester {
 	
 	private IndexedUnsortedList<Integer> A_removeFirst_0() {
 		IndexedUnsortedList<Integer> list = emptyList_addToFrontA_A(); 
-		list.remove(ELEMENT_A);
+		list.removeFirst();
 		return list;
 	}
 
@@ -427,12 +427,29 @@ public class ListTester {
 	 * @danielstarcate2
 	 */
 
+	 private IndexedUnsortedList<Integer> AB_addToFrontC_CAB() {
+		IndexedUnsortedList<Integer> list = newList();
+		list.add(ELEMENT_A);
+		list.add(ELEMENT_B);
+		list.addToFront(ELEMENT_C);
+		return list;
+	}
+	private Scenario<Integer> AB_addToFrontC_CAB = () -> AB_addToFrontC_CAB();
+
 	 
 	/** Scenario #20: [A,B] -> addAfter(C,B) -> [A,B,C] 
 	 * @return [A,B,C] after addAfter(C,B) 
 	 * @danielstarcate2
 	 */
 
+	 private IndexedUnsortedList<Integer> AB_addAfterCB_ABC() {
+		IndexedUnsortedList<Integer> list = newList();
+		list.add(ELEMENT_A);
+		list.add(ELEMENT_B);
+		list.addAfter(ELEMENT_C, ELEMENT_B);
+		return list;
+	}
+	private Scenario<Integer> AB_addAfterCB_ABC = () -> AB_addAfterCB_ABC();
 	 
 	/** Scenario #23: [A,B] -> add(1,C) -> [A,C,B] 
 	 * @return [A,C,B] after add(1,C)
