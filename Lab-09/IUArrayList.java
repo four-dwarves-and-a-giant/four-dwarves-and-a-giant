@@ -117,7 +117,8 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 	@Override
 	public E get(int index) {
 		// TODO 
-		return null;
+		if (index < 0 || index >= size()) { throw new IndexOutOfBoundsException(); }
+		return array[index];
 	}
 
 	@Override
@@ -141,13 +142,15 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 	@Override
 	public E first() {
 		// TODO 
-		return null;
+		if (isEmpty()) { throw new NoSuchElementException(); }
+		return array[0];
 	}
 
 	@Override
 	public E last() {
 		// TODO 
-		return null;
+		if (isEmpty()) { throw new NoSuchElementException(); }
+		return array[rear - 1];
 	}
 
 	@Override
@@ -158,13 +161,13 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 	@Override
 	public boolean isEmpty() {
 		// TODO 
-		return false;
+		return rear == 0;
 	}
 
 	@Override
 	public int size() {
 		// TODO 
-		return 0;
+		return rear;
 	}
 
 	@Override

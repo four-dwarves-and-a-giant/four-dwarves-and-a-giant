@@ -19,7 +19,7 @@ public class ListTester {
 		goodList, badList, arrayList, singleLinkedList, doubleLinkedList
 	};
 	// TODO: THIS IS WHERE YOU CHOOSE WHICH LIST TO TEST
-	private final static ListToUse LIST_TO_USE = ListToUse.goodList;
+	private final static ListToUse LIST_TO_USE = ListToUse.arrayList;
 
 	// possible results expected in tests
 	private enum Result {
@@ -182,11 +182,15 @@ public class ListTester {
 		//1-element to empty list
 			// Scenario: 12
 		testEmptyList(A_removeFirst_0, "A_removeFirst_0");
-			// Scenario: 13
 
+			// Scenario: 13
+		testEmptyList(A_removeLast_0, "A_removeLast_0");
+		
 			// Scenario: 14
 		testEmptyList(A_removeA, "A_removeA");
+
 			// Scenario: 15
+		testEmptyList(A_remove0_0, "A_remove0_0");
 
 			// Scenario: 44
 
@@ -301,9 +305,9 @@ public class ListTester {
 		case badList:
 			listToUse = new BadList<Integer>();
 			break;
-		// case arrayList:
-		// 	listToUse = new IUArrayList<Integer>();
-		// 	break;
+		case arrayList:
+			listToUse = new IUArrayList<Integer>();
+			break;
 		// case singleLinkedList:
 		// 	listToUse = new IUSingleLinkedList<Integer>();
 		// 	break;
@@ -397,6 +401,13 @@ public class ListTester {
 	/** Scenario #13: [A] -> removeLast() -> [] 
 	 * @return [] after removeLast()
 	 */
+	private IndexedUnsortedList<Integer> A_removeLast_0() {
+		IndexedUnsortedList<Integer> list = emptyList_addToFrontA_A();
+		list.removeLast();
+		return list;
+	}
+
+	private Scenario<Integer> A_removeLast_0 = () -> A_removeLast_0();
 
 	/** Scenario #14: [A] -> remove(A) -> []
 	 * @return [] after remove(A)
@@ -412,8 +423,13 @@ public class ListTester {
 	/** Scenario #15: [A] -> remove(0) -> [] 
 	 * @return [] after remove(0)
 	 */
+	private IndexedUnsortedList<Integer> A_remove0_0() {
+		IndexedUnsortedList<Integer> list = emptyList_addToFrontA_A();
+		list.remove(0);
+		return list;
+	}
 
-	 
+	private Scenario<Integer> A_remove0_0 = () -> A_remove0_0();	 
 	/** Scenario #16: [A] -> set(0,B) -> [B] 
 	 * @return [B] after set(0,B)
 	 */
