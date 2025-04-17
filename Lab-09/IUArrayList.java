@@ -57,19 +57,21 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 
 	@Override
 	public void addAfter(E element, E target) {
-		// TODO @QuirtTheDirt
+		if (!contains(target)) { throw new NoSuchElementException(); }
+		shiftRight(indexOf(target));
 		modCount++; // DO NOT REMOVE ME
 	}
 
 	@Override
 	public void add(int index, E element) {
-		// TODO @QuirtTheDirt
+		shiftRight(index);
+		array[index] = element;
 		modCount++; // DO NOT REMOVE ME
 	}
 
 	@Override
 	public E removeFirst() {
-		// TODO @QuirtTheDirt
+		remove(rear);
 		modCount++; // DO NOT REMOVE ME
 		return null;
 	}
@@ -99,6 +101,21 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 
 		modCount++; // DO NOT REMOVE ME
 		return retVal;
+	}
+
+	// service method for add methods
+	@SuppressWarnings("unchecked")
+	private void shiftRight(int index) {
+		if (index == NOT_FOUND) {
+			throw new NoSuchElementException();
+		}
+		if (array[array.length] != null) { expandCapacity(); }
+		E[] tempArray = (array);
+		for (int i = index; i < array.length; i++) {
+			array[i] = tempArray[i - 1];
+		}
+		array[index] = null;
+
 	}
 
 	@Override
