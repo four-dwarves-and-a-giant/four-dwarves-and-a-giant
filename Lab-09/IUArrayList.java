@@ -55,6 +55,7 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 	public void add(E element) {
 		// TODO @Faithewing315
 		add(rear, element);
+
 		modCount++; // DO NOT REMOVE ME
 	}
 
@@ -131,6 +132,7 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 		if (index < 0 || index > size() - 1) {
 			throw new IndexOutOfBoundsException();
 		}
+
 		return array[index];
 	}
 
@@ -173,20 +175,16 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO @danielstarcate2
 		return size() == 0;
 	}
 
 	@Override
 	public int size() {
-		// TODO @danielstarcate2
 		return rear;
 	}
 
 	@Override
 	public String toString() {
-		String result = "[";
-		// TODO @danielstarcate2
 		for (int i = 0; i < rear; i++) {
 			result += array[i];
 			if (i < rear - 1) {
