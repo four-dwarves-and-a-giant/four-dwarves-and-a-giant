@@ -185,6 +185,7 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 
 	@Override
 	public String toString() {
+		String result = "[";
 		for (int i = 0; i < rear; i++) {
 			result += array[i];
 			if (i < rear - 1) {
