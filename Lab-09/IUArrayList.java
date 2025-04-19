@@ -38,7 +38,6 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 
 	@Override
 	public void addToFront(E element) {
-		// TODO @Faithewing315
 		add(0, element);
 		modCount++; // DO NOT REMOVE ME
 		
@@ -46,14 +45,12 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 
 	@Override
 	public void addToRear(E element) {
-		// TODO @Faithewing315
 		add(element);
 		modCount++; // DO NOT REMOVE ME
 	}
 
 	@Override
 	public void add(E element) {
-		// TODO @Faithewing315
 		add(rear, element);
 
 		modCount++; // DO NOT REMOVE ME
@@ -62,7 +59,7 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 	@Override
 	public void addAfter(E element, E target) {
 		if (!contains(target)) { throw new NoSuchElementException(); }
-		add(indexOf(target), element);
+		add(indexOf(target)+1, element);
 		modCount++; // DO NOT REMOVE ME
 	}
 
@@ -76,7 +73,6 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 
 	@Override
 	public E removeFirst() {
-		// TODO @QuirtTheDirt
 		E retVal = remove(first());
 		modCount++; // DO NOT REMOVE ME
 		return retVal;
@@ -128,7 +124,6 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 
 	@Override
 	public E get(int index) {
-		// TODO @groundbeef-java
 		if (index < 0 || index > size() - 1) {
 			throw new IndexOutOfBoundsException();
 		}
@@ -156,14 +151,12 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 
 	@Override
 	public E first() {
-		// TODO @groundbeef-java
 		if (isEmpty()) {throw new NoSuchElementException();};
 		return array[0];
 	}
 
 	@Override
 	public E last() {
-		// TODO @groundbeef-java
 		if (isEmpty()) {throw new NoSuchElementException();};
 		return array[rear-1];
 	}
