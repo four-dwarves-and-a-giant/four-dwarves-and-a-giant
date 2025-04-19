@@ -174,19 +174,19 @@ public class ListTester {
 		testSingleElementList(emptyList_addToFrontA_A, "emptyList_addToFrontA_A", LIST_A, STRING_A);
 			// Scenario: 03
 		testSingleElementList(emptyList_addToRearA_A, "emptyList_AddToFrontA_A", LIST_A, STRING_A);
-			// Scenario: 04 @Bombzone
+			// Scenario: 04
 		testSingleElementList(emptyList_addA_A, "emptyList_AddA_A", LIST_A, STRING_A);
-			// Scenario: 05 @Bombzone
+			// Scenario: 05
 		testSingleElementList(emptyList_addA_0A, "emptyList_AddA_0A", LIST_A, STRING_A);
 			
 		//1-element to empty list
 			// Scenario: 12
 		testEmptyList(A_removeFirst_0, "A_removeFirst_0");
-			// Scenario: 13 @groundbeef-java
+			// Scenario: 13
 		testEmptyList(A_removeLast_0, "A_removeLast_0");
 			// Scenario: 14
 		testEmptyList(A_removeA, "A_removeA");
-			// Scenario: 15 @groundbeef-java
+			// Scenario: 15
 		testEmptyList(A_remove0_0, "A_remove0_0");
 			// Scenario: 44
 
@@ -209,13 +209,13 @@ public class ListTester {
 
 			
 		//2-element to 1-element
-			// Scenario: 25 @QuirtTheDirt
+			// Scenario: 25
 		testSingleElementList(AB_removeFirst_B, "AB_removeFirst_B", LIST_B, STRING_B);
 			// Scenario: 26
 		testSingleElementList(AB_removeLast_A, "AB_removeLast_A", LIST_A, STRING_A);
 			// Scenario: 27
 
-			// Scenario: 28 @QuirtTheDirt
+			// Scenario: 28
 		testSingleElementList(AB_removeB_A, "AB_removeB_A", LIST_A, STRING_A);
 			// Scenario: 29
 
@@ -227,9 +227,9 @@ public class ListTester {
 
 			
 		//2-element to 3-element
-			// Scenario: 17 @danielstarcate2
+			// Scenario: 17
 		testThreeElementList(AB_addToFrontC_CAB, "AB_addToFrontC_CAB", LIST_CAB, STRING_CAB);
-			// Scenario: 20 @danielstarcate2
+			// Scenario: 20
 		testThreeElementList(AB_addAfterCB_ABC, "AB_addAfterCB_ABC", LIST_ABC, STRING_ABC);
 			// Scenario: 23
 
@@ -344,7 +344,6 @@ public class ListTester {
 
 	/** Scenario #04: [] -> add(A) -> [A] 
 	 * @return [A] after add(A)
-	 * @Bombzone
 	 */
 	private IndexedUnsortedList<Integer> emptyList_addA_A() {
 		IndexedUnsortedList<Integer> list = newList();
@@ -353,7 +352,7 @@ public class ListTester {
 	}
 	private Scenario<Integer> emptyList_addA_A = () -> emptyList_addA_A();
 	/** Scenario #05: [] -> add(0, A) -> [A] 
-	 * @return [A] after add(0, A) @Bombzone
+	 * @return [A] after add(0, A)
 	 */
 	private IndexedUnsortedList<Integer> emptyList_addA_0A() {
 		IndexedUnsortedList<Integer> list = newList();
@@ -406,7 +405,6 @@ public class ListTester {
 
 	/** Scenario #13: [A] -> removeLast() -> [] 
 	 * @return [] after removeLast()
-	 * @groundbeef-java
 	 */
 	private IndexedUnsortedList<Integer> A_removeLast_0() {
 		IndexedUnsortedList<Integer> list = emptyList_addToFrontA_A();
@@ -429,7 +427,6 @@ public class ListTester {
 
 	/** Scenario #15: [A] -> remove(0) -> [] 
 	 * @return [] after remove(0)
-	 * @groundbeef-java
 	 */
 	private IndexedUnsortedList<Integer> A_remove0_0() {
 		IndexedUnsortedList<Integer> list = emptyList_addToFrontA_A();
@@ -445,7 +442,6 @@ public class ListTester {
 	 
 	/** Scenario #17: [A,B] -> addToFront(C) -> [C,A,B] 
 	 * @return [C,A,B] after addToFront(C) 
-	 * @danielstarcate2
 	 */
   private IndexedUnsortedList<Integer> AB_addToFrontC_CAB() {
 		IndexedUnsortedList<Integer> list = newList();
@@ -458,7 +454,6 @@ public class ListTester {
 	 
 	/** Scenario #20: [A,B] -> addAfter(C,B) -> [A,B,C] 
 	 * @return [A,B,C] after addAfter(C,B) 
-	 * @danielstarcate2
 	 */
 
 
@@ -478,7 +473,6 @@ public class ListTester {
 	 
 	/** Scenario #25: [A,B] -> removeFirst() -> [B]
 	 * @return [B] after removeFirst()
-	 * @QuirtTheDirt
 	 */
 	private IndexedUnsortedList<Integer> AB_removeFirst_B() {
 		IndexedUnsortedList<Integer> list = newList();
@@ -509,7 +503,6 @@ public class ListTester {
 	 
 	/** Scenario #28: [A,B] -> remove(B) -> [A]
 	 * @return [A] after remove(B)
-	 * @QuirtTheDirt
 	 */
 	private IndexedUnsortedList<Integer> AB_removeB_A() {
 		IndexedUnsortedList<Integer> list = newList();
