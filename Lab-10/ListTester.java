@@ -854,8 +854,8 @@ public class ListTester {
 			printTest(scenarioName + "_testAddAtIndex3", testAddAtIndex(scenario.build(), 3, ELEMENT_X, Result.IndexOutOfBounds));
 			printTest(scenarioName + "_testRemoveFirst", testRemoveFirst(scenario.build(), contents[0], Result.MatchingValue));
 			printTest(scenarioName + "_testRemoveLast", testRemoveLast(scenario.build(), contents[1], Result.MatchingValue));
-			printTest(scenarioName + "_testRemoveA", testRemoveElement(scenario.build(), ELEMENT_A, Result.MatchingValue));
-			printTest(scenarioName + "_testRemoveB", testRemoveElement(scenario.build(), ELEMENT_B, Result.MatchingValue));
+			printTest(scenarioName + "_testRemoveA", testRemoveElement(scenario.build(), contents[0], Result.MatchingValue));
+			printTest(scenarioName + "_testRemoveB", testRemoveElement(scenario.build(), contents[1], Result.MatchingValue));
 			printTest(scenarioName + "_testRemoveX", testRemoveElement(scenario.build(), ELEMENT_X, Result.NoSuchElement));
 			printTest(scenarioName + "_testRemoveNeg1", testRemoveIndex(scenario.build(), -1, null, Result.IndexOutOfBounds));
 			printTest(scenarioName + "_testRemove0", testRemoveIndex(scenario.build(), 0, contents[0], Result.MatchingValue));
@@ -874,8 +874,8 @@ public class ListTester {
 			printTest(scenarioName + "_testIndexOfX", testIndexOf(scenario.build(), ELEMENT_X, -1));
 			printTest(scenarioName + "_testFirst", testFirst(scenario.build(), contents[0], Result.MatchingValue));
 			printTest(scenarioName + "_testLast", testLast(scenario.build(), contents[1], Result.MatchingValue));
-			printTest(scenarioName + "_testContainsA", testContains(scenario.build(), ELEMENT_A, Result.True));
-			printTest(scenarioName + "_testContainsB", testContains(scenario.build(), ELEMENT_B, Result.True));
+			printTest(scenarioName + "_testContainsA", testContains(scenario.build(), contents[0], Result.True));
+			printTest(scenarioName + "_testContainsB", testContains(scenario.build(), contents[1], Result.True));
 			printTest(scenarioName + "_testContainsX", testContains(scenario.build(), ELEMENT_X, Result.False));
 			printTest(scenarioName + "_testIsEmpty", testIsEmpty(scenario.build(), Result.False));
 			printTest(scenarioName + "_testSize", testSize(scenario.build(), 2));
@@ -937,9 +937,9 @@ public class ListTester {
 			printTest(scenarioName + "_testAddAtIndex4", testAddAtIndex(scenario.build(), 4, ELEMENT_X, Result.IndexOutOfBounds));
 			printTest(scenarioName + "_testRemoveFirst", testRemoveFirst(scenario.build(), contents[0], Result.MatchingValue));
 			printTest(scenarioName + "_testRemoveLast", testRemoveLast(scenario.build(), contents[2], Result.MatchingValue));
-			printTest(scenarioName + "_testRemoveA", testRemoveElement(scenario.build(), ELEMENT_A, Result.MatchingValue));
-			printTest(scenarioName + "_testRemoveB", testRemoveElement(scenario.build(), ELEMENT_B, Result.MatchingValue));
-			printTest(scenarioName + "_testRemoveC", testRemoveElement(scenario.build(), ELEMENT_C, Result.MatchingValue));
+			printTest(scenarioName + "_testRemoveA", testRemoveElement(scenario.build(), contents[0], Result.MatchingValue));
+			printTest(scenarioName + "_testRemoveB", testRemoveElement(scenario.build(), contents[1], Result.MatchingValue));
+			printTest(scenarioName + "_testRemoveC", testRemoveElement(scenario.build(), contents[2], Result.MatchingValue));
 			printTest(scenarioName + "_testRemoveX", testRemoveElement(scenario.build(), ELEMENT_X, Result.NoSuchElement));
 			printTest(scenarioName + "_testRemoveNeg1", testRemoveIndex(scenario.build(), -1, null, Result.IndexOutOfBounds));
 			printTest(scenarioName + "_testRemove0", testRemoveIndex(scenario.build(), 0, contents[0], Result.MatchingValue)); 
@@ -962,9 +962,9 @@ public class ListTester {
 			printTest(scenarioName + "_testIndexOfX", testIndexOf(scenario.build(), ELEMENT_X, -1));
 			printTest(scenarioName + "_testFirst", testFirst(scenario.build(), contents[0], Result.MatchingValue));
 			printTest(scenarioName + "_testLast", testLast(scenario.build(), contents[2], Result.MatchingValue));
-			printTest(scenarioName + "_testContainsA", testContains(scenario.build(), ELEMENT_A, Result.True));
-			printTest(scenarioName + "_testContainsB", testContains(scenario.build(), ELEMENT_B, Result.True));
-			printTest(scenarioName + "_testContainsC", testContains(scenario.build(), ELEMENT_C, Result.True));
+			printTest(scenarioName + "_testContainsA", testContains(scenario.build(), contents[0], Result.True));
+			printTest(scenarioName + "_testContainsB", testContains(scenario.build(), contents[1], Result.True));
+			printTest(scenarioName + "_testContainsC", testContains(scenario.build(), contents[2], Result.True));
 			printTest(scenarioName + "_testContainsX", testContains(scenario.build(), ELEMENT_X, Result.False));
 			printTest(scenarioName + "_testIsEmpty", testIsEmpty(scenario.build(), Result.False));
 			printTest(scenarioName + "_testSize", testSize(scenario.build(), 3));
