@@ -114,6 +114,13 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 	}
 
 	@Override
+	public E remove(int index) {
+		// TODO @Bombzone
+		modCount++; // DO NOT REMOVE ME
+		return null;
+	}
+
+	@Override
 	public void set(int index, E element) {
 		if (index < 0 || index > size() - 1) {
 			throw new IndexOutOfBoundsException();

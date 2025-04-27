@@ -209,14 +209,24 @@ public class ListTester {
 
 			
 		//2-element to 1-element
+<<<<<<< HEAD
+			// Scenario: 25 @QuirtTheDirt
+=======
 			// Scenario: 25
+>>>>>>> 65330460f392fb22551aa96de4c3606b7a49b7ea
 		testSingleElementList(AB_removeFirst_B, "AB_removeFirst_B", LIST_B, STRING_B);
 			// Scenario: 26
 		testSingleElementList(AB_removeLast_A, "AB_removeLast_A", LIST_A, STRING_A);
 			// Scenario: 27
 
+<<<<<<< HEAD
+			// Scenario: 28 @QuirtTheDirt
+		testSingleElementList(AB_removeB_A, "AB_removeB_A", LIST_A, STRING_A);
+			// Scenario: 26
+=======
 			// Scenario: 28
 		testSingleElementList(AB_removeB_A, "AB_removeB_A", LIST_A, STRING_A);
+>>>>>>> 65330460f392fb22551aa96de4c3606b7a49b7ea
 			// Scenario: 29
 
 			// Scenario: 30
@@ -482,7 +492,11 @@ public class ListTester {
 		return list;
 	}
 	private Scenario<Integer> AB_removeFirst_B = () -> AB_removeFirst_B();
+<<<<<<< HEAD
+	 
+=======
 	 	 
+>>>>>>> 65330460f392fb22551aa96de4c3606b7a49b7ea
 	/** Scenario #26: [A,B] -> removeLast() -> [A]
 	 * @return [A] after removeLast()
 	 */
@@ -512,7 +526,11 @@ public class ListTester {
 		return list;
 	}
 	private Scenario<Integer> AB_removeB_A = () -> AB_removeB_A();
+<<<<<<< HEAD
+	 
+=======
 
+>>>>>>> 65330460f392fb22551aa96de4c3606b7a49b7ea
 	/** Scenario #29: [A,B] -> remove(0) -> [B]
 	 * @return [B] after remove(0)
 	 */
