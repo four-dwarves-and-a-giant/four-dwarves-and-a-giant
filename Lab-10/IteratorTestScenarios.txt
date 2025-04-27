@@ -58,4 +58,4 @@ Iterator Test Cases:
 	iterator(), next(), next(), remove() throws no Exxception
 	iterator(), next(), next(), next(), hasNext() returns false
 	iterator(), next(), next(), next(), next() throws NoSuchElementException
-	iterator(), next(), next(), next(), remove() throws no Exxception
+	iterator(), next(), next(), next(), remove() throws no Exception
