@@ -192,6 +192,7 @@ public class IUSingleLinkedList<E> implements IndexedUnsortedList<E> {
 			current = next;
 			next = next.getNext();
 			E result = current.getElement();
+
 			return result;
 		}
 		
