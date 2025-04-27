@@ -198,7 +198,6 @@ public class IUSingleLinkedList<E> implements IndexedUnsortedList<E> {
             if (i < count - 1) {
                 result += ", ";
             }
-            result += get(i) + ", ";
         }
         return result + "]";
     }

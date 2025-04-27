@@ -203,8 +203,7 @@ public class IUArrayList<E> implements IndexedUnsortedList<E> {
 	// IGNORE THE FOLLOWING COMMENTED OUT CODE UNTIL LAB 10
 	// DON'T DELETE ME, HOWEVER!!!
 	public Iterator<E> iterator() {
-		// return new IUArrayListIterator(); // UNCOMMENT ME IN LAB 10
-		return null; // REMOVE ME IN LAB 10
+		return new IUArrayListIterator(); // UNCOMMENT ME IN LAB 10
 	}
 
 	// UNCOMMENT THE CODE BELOW IN LAB 10
