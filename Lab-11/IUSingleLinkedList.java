@@ -57,7 +57,7 @@ public class IUSingleLinkedList<E> implements IndexedUnsortedList<E> {
 
     @Override
     public void add(int index, E element) {
-        if ((index<0) || (index > size())) {
+        if ((index < 0) || (index > size())) {
             throw new IndexOutOfBoundsException();
         }
         LinearNode<E> newNode = new LinearNode<>(element);
@@ -79,7 +79,7 @@ public class IUSingleLinkedList<E> implements IndexedUnsortedList<E> {
             } else {
                 previous.setNext(newNode);
             }
-            if (current == null){
+            if (current == null) {
                 rear = newNode;
             }
         }
@@ -115,7 +115,7 @@ public class IUSingleLinkedList<E> implements IndexedUnsortedList<E> {
 
     @Override
     public E remove(int index) {
-        if ((index<0) || (index >= size())) {
+        if ((index < 0) || (index >= size())) {
             throw new IndexOutOfBoundsException();
         }
         if (index == 0) {

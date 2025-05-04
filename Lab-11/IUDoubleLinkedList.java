@@ -1,126 +1,107 @@
+
 import java.util.Iterator;
 import java.util.ListIterator;
 
-public class IUDoubleLinkedList implements IndexedUnsortedList {
+public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
 
     @Override
-    public void addToFront(Object element) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addToFront'");
+    public void addToFront(E element) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void addToRear(Object element) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addToRear'");
+    public void addToRear(E element) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void add(Object element) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+    public void add(E element) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void addAfter(Object element, Object target) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addAfter'");
+    public void addAfter(E element, E target) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void add(int index, Object element) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+    public void add(int index, E element) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Object removeFirst() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeFirst'");
+    public E removeFirst() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Object removeLast() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeLast'");
+    public E removeLast() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Object remove(Object element) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+    public E remove(E element) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Object remove(int index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+    public E remove(int index) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void set(int index, Object element) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'set'");
+    public void set(int index, E element) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Object get(int index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+    public E get(int index) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public int indexOf(Object element) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'indexOf'");
+    public int indexOf(E element) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Object first() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'first'");
+    public E first() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Object last() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'last'");
+    public E last() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public boolean contains(Object target) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'contains'");
+    public boolean contains(E target) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'size'");
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Iterator iterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
+    public Iterator<E> iterator() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public ListIterator listIterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
+    public ListIterator<E> listIterator() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public ListIterator listIterator(int startingIndex) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
+    public ListIterator<E> listIterator(int startingIndex) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }
