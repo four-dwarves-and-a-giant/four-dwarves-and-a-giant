@@ -113,10 +113,12 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
         E result = target.getElement();
 
         if (index == 0) {
-            target.getNext().setPrevious(null);
-        } else {
+            front = target.getNext();
+        } else if (target.getNext() != null){
             target.getPrevious().setNext(target.getNext());
             target.getNext().setPrevious(target.getPrevious());
+        } else {
+            rear = target.getPrevious();
         }
         count--;
         modCount++;
@@ -175,6 +177,18 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
     @Override
     public int size() {
         return count;
+    }
+
+    @Override
+    public String toString() {
+        String result = "[";
+        for (int i = 0; i < count; i++) {
+            result += get(i);
+            if (i < count - 1) {
+                result += ", ";
+            }
+        }
+        return result + "]";
     }
 
     public BidirectionalNode<E> findNode(int index) {
