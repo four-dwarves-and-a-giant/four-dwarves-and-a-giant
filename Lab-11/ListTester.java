@@ -14,13 +14,12 @@ import java.util.NoSuchElementException;
  * @author mvail, mhthomas, amussell (lambdas), lsevigny (iterator decorator)
  */
 public class ListTester {
-    //possible lists that could be tested
-
-    private static enum ListToUse {
-        goodList, badList, arrayList, singleLinkedList, doubleLinkedList
-    };
-    // TODO: THIS IS WHERE YOU CHOOSE WHICH LIST TO TEST
-    private final static ListToUse LIST_TO_USE = ListToUse.singleLinkedList;
+	//possible lists that could be tested
+	private static enum ListToUse {
+		goodList, badList, arrayList, singleLinkedList, doubleLinkedList
+	};
+	// TODO: THIS IS WHERE YOU CHOOSE WHICH LIST TO TEST
+	private final static ListToUse LIST_TO_USE = ListToUse.doubleLinkedList;
 
     // possible results expected in tests
     private enum Result {
@@ -328,33 +327,33 @@ public class ListTester {
 	 * @return [] after constructor
 	 */
 	private IndexedUnsortedList<Integer> newList() {
-        IndexedUnsortedList<Integer> listToUse;
-        switch (LIST_TO_USE) {
-            case goodList:
-                listToUse = new GoodList<Integer>();
-                break;
-            case badList:
-                listToUse = new BadList<Integer>();
-                break;
-            case arrayList:
-                listToUse = new IUArrayList<Integer>();
-                break;
-            case singleLinkedList:
-                listToUse = new IUSingleLinkedList<Integer>();
-                break;
-            case doubleLinkedList:
-                listToUse = new IUDoubleLinkedList<Integer>();
-                break;
-            default:
-                listToUse = null;
-        }
-        return listToUse;
-    }
-    // The following creates a "lambda" reference that allows us to pass a scenario
-    //  builder method as an argument. We covered in lecture how it works - however, if you are
-    //  struggling with it, just make sure each scenario building method has a corresponding Scenario 
-    //  assignment statement as in these examples.
-    private Scenario<Integer> newList = () -> newList();
+		IndexedUnsortedList<Integer> listToUse;
+		switch (LIST_TO_USE) {
+		case goodList:
+			listToUse = new GoodList<Integer>();
+			break;
+		case badList:
+			listToUse = new BadList<Integer>();
+			break;
+		case arrayList:
+			listToUse = new IUArrayList<Integer>();
+			break;
+		case singleLinkedList:
+			listToUse = new IUSingleLinkedList<Integer>();
+			break;
+		case doubleLinkedList:
+			listToUse = new IUDoubleLinkedList<Integer>();
+			break;
+		default:
+			listToUse = null;
+		}
+		return listToUse;
+	}
+	// The following creates a "lambda" reference that allows us to pass a scenario
+	//  builder method as an argument. We covered in lecture how it works - however, if you are
+	//  struggling with it, just make sure each scenario building method has a corresponding Scenario 
+	//  assignment statement as in these examples.
+	private Scenario<Integer> newList = () -> newList();
 
     /**
      * Scenario #02: [] -> addToFront(A) -> [A]
