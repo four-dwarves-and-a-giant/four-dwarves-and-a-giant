@@ -206,6 +206,7 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
         return temp;
     }
 
+    // Added
     @Override
     public Iterator<E> iterator() {
         return new DoubleLinkedListIterator();
