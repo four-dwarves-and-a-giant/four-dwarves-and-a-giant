@@ -14,12 +14,13 @@ import java.util.NoSuchElementException;
  * @author mvail, mhthomas, amussell (lambdas), lsevigny (iterator decorator)
  */
 public class ListTester {
-	//possible lists that could be tested
-	private static enum ListToUse {
-		goodList, badList, arrayList, singleLinkedList, doubleLinkedList
-	};
-	// TODO: THIS IS WHERE YOU CHOOSE WHICH LIST TO TEST
-	private final static ListToUse LIST_TO_USE = ListToUse.doubleLinkedList;
+    //possible lists that could be tested
+
+    private static enum ListToUse {
+        goodList, badList, arrayList, singleLinkedList, doubleLinkedList
+    };
+    // TODO: THIS IS WHERE YOU CHOOSE WHICH LIST TO TEST
+    private final static ListToUse LIST_TO_USE = ListToUse.doubleLinkedList;
 
     // possible results expected in tests
     private enum Result {
