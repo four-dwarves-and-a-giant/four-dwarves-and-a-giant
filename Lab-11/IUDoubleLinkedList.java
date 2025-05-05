@@ -4,7 +4,6 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
-
     private BidirectionalNode<E> front, rear;
     private int count;
     private int modCount;
@@ -17,6 +16,7 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
 
     @Override
     public void addToFront(E element) {
+        add(0, element);
         add(0, element);
     }
 
@@ -35,6 +35,7 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
 
     @Override
     public void add(E element) {
+        addToRear(element);
         addToRear(element);
     }
 
