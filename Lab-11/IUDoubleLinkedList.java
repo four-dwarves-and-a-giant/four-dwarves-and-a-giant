@@ -1,4 +1,4 @@
-
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
@@ -70,7 +70,7 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
             } else {
                 previous.setNext(newNode);
             }
-            if (current == null) {
+            if (current == null){
                 rear = newNode;
             }
         }
@@ -115,7 +115,7 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
 
         if (index == 0) {
             front = target.getNext();
-        } else if (target.getNext() != null) {
+        } else if (target.getNext() != null){
             target.getPrevious().setNext(target.getNext());
             target.getNext().setPrevious(target.getPrevious());
         } else {
@@ -180,6 +180,19 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
         return count;
     }
 
+    public BidirectionalNode<E> findNode(int index) {
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        BidirectionalNode<E> temp;
+        temp = front;
+            for (int i = 0; i < index; i++) {
+                temp = temp.getNext();
+            }
+        
+        return temp;
+    }
+
     @Override
     public String toString() {
         String result = "[";
@@ -192,35 +205,221 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
         return result + "]";
     }
 
-    public BidirectionalNode<E> findNode(int index) {
-        if (index < 0 || index >= size()) {
-            throw new IndexOutOfBoundsException();
-        }
-        BidirectionalNode<E> temp;
-        temp = front;
-        for (int i = 0; i < index; i++) {
-            temp = temp.getNext();
-        }
-
-        return temp;
-    }
-
     @Override
     public Iterator<E> iterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
+        return new DoubleLinkedListIterator();
+    }
+
+    private class DoubleLinkedListIterator implements Iterator<E> {
+
+        private BidirectionalNode<E> previous;
+        private BidirectionalNode<E> current;
+        private BidirectionalNode<E> next;
+        private int iterModCount;
+
+        public DoubleLinkedListIterator() {
+            previous = null;
+            current = null;
+            next = front;
+            iterModCount = modCount;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (iterModCount != modCount) { throw new ConcurrentModificationException(); }
+            return next != null;
+        }
+
+        @Override
+        public E next() {
+            if (!hasNext()) { throw new NoSuchElementException(); }
+
+            if (current != null) {
+                previous = current;
+            }
+            current = next;
+            next = next.getNext();
+            return current.getElement();
+        }
+        
+        @Override
+        public void remove() {
+            if (iterModCount != modCount) {
+                throw new ConcurrentModificationException();
+            }
+            if (current == null) {
+                throw new IllegalStateException();
+            }
+            if (previous == null) {
+                front = next;
+            } else {
+                previous.setNext(next);
+            }
+            if (current == rear) {
+                rear = previous;
+            }
+            current = null;
+            count--;
+            modCount++;
+            iterModCount++;
+        }
     }
 
     @Override
     public ListIterator<E> listIterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
+        return new DoubleLinkedListListIterator();
     }
 
     @Override
     public ListIterator<E> listIterator(int startingIndex) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
+        return new DoubleLinkedListListIterator(startingIndex);
+    }
+    private class LinkedCursor {
+        private int virtualNextIndex;
+
+        public LinkedCursor(int nextVirtualIndex) {
+            if (nextVirtualIndex < 0 || nextVirtualIndex > count) {
+                throw new IndexOutOfBoundsException();
+            }
+            this.virtualNextIndex = nextVirtualIndex;
+        }
+
+        public int getVirtualNextIndex() {
+            return virtualNextIndex;
+        }
+
+        public int getVirtualPreviousIndex() {
+            return virtualNextIndex - 1;
+        }
+
+        public void rightShift() {
+            if (virtualNextIndex < count) {
+                virtualNextIndex++;
+            }
+        }
+
+        public void leftShift() {
+            if (virtualNextIndex > 0) {
+                virtualNextIndex--;
+            }
+        }
+
     }
 
+    private class DoubleLinkedListListIterator implements ListIterator<E> {
+        private LinkedCursor cursor;
+        private int listIterModCount;
+        private BidirectionalNode<E> current;
+        private BidirectionalNode<E> lastReturned;
+
+        private DoubleLinkedListListIterator() {
+            this(0);
+        }
+
+        public DoubleLinkedListListIterator(int nextVirtualIndex) {
+            cursor = new LinkedCursor(nextVirtualIndex);
+            listIterModCount = modCount;
+            // current = // How to get current?
+            lastReturned = null;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (listIterModCount != modCount) { throw new ConcurrentModificationException(); }
+            return cursor.getVirtualNextIndex() < 0;
+        }
+
+        @Override
+        public E next() {
+            
+            if (!hasNext()) { throw new NoSuchElementException(); }
+            E item =  current.getElement();
+            lastReturned = current;
+            current = current.getNext();
+            cursor.rightShift();
+            return item;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            if (listIterModCount != modCount) { throw new ConcurrentModificationException(); }
+            return cursor.getVirtualPreviousIndex() > -1;
+        }
+
+        @Override
+        public E previous() {
+            if (listIterModCount != modCount) { throw new ConcurrentModificationException(); }
+            if (!hasPrevious()) { throw new NoSuchElementException(); }
+            current = lastReturned = current.getPrevious();
+            E item = current.getElement();
+            cursor.leftShift();
+            return item;
+        }
+
+        @Override
+        public int nextIndex() {
+            return cursor.getVirtualNextIndex();
+        }
+
+        @Override
+        public int previousIndex() {
+            return cursor.getVirtualPreviousIndex();
+        }
+
+        @Override
+        public void remove() {
+            if (listIterModCount != modCount) throw new ConcurrentModificationException();
+            if (lastReturned == null) throw new IllegalStateException();
+
+            BidirectionalNode<E> previousNode = lastReturned.getPrevious();
+            BidirectionalNode<E> nextNode = lastReturned.getNext();
+
+            if (previousNode != null) {previousNode.setNext(nextNode); } else { front = nextNode;}
+            if (nextNode != null) { nextNode.setPrevious(previousNode); } else { rear = previousNode; }
+            if (lastReturned == current) {
+                current = nextNode;
+            }
+
+            lastReturned = null;
+            count--;
+            modCount++;
+            listIterModCount++;
+        }
+
+        @Override
+        public void set(E e) {
+            if (listIterModCount != modCount ) { throw new ConcurrentModificationException(); }
+            if ( lastReturned == null ) { throw new IllegalStateException(); }
+            BidirectionalNode<E> newNode = new BidirectionalNode<>(e);
+            lastReturned = newNode;
+        }
+
+        @Override
+        public void add(E e) {
+            if (listIterModCount != modCount) { throw new ConcurrentModificationException(); }
+            BidirectionalNode<E> newNode = new BidirectionalNode<>(e);
+            if (front == null) {
+                front = rear = newNode;
+            } else if (current == front) {
+                newNode.setNext(front);
+                front.setPrevious(newNode);
+                front = newNode;
+            } else if (current == null) {
+                newNode.setPrevious(rear);
+                rear.setNext(newNode);
+                rear = newNode;
+            } else {
+                BidirectionalNode<E> prev = current.getPrevious();
+                newNode.setPrevious(prev);
+                newNode.setNext(current);
+                if (prev != null) { prev.setNext(newNode); }
+                current.setPrevious(newNode);
+            }
+            count++;
+            modCount++;
+            listIterModCount++;
+            cursor.rightShift();
+            lastReturned = null;
+        }
+    }
 }

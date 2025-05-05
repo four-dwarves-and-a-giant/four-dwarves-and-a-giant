@@ -151,7 +151,7 @@ public class IUSingleLinkedList<E> implements IndexedUnsortedList<E> {
     public int indexOf(E element) {
         LinearNode<E> temp = front;
         for (int i = 0; i < size(); i++) {
-            if (temp.getElement().equals(element)) {
+            if (element == null & temp.getElement().equals(element)) {
                 return i;
             }
             temp = temp.getNext();
@@ -271,27 +271,29 @@ public class IUSingleLinkedList<E> implements IndexedUnsortedList<E> {
         }
 
         @Override
-        public void remove() {
-            if (iterModCount != modCount) {
-                throw new ConcurrentModificationException();
-            }
-            if (current == null) {
-                throw new IllegalStateException();
-            }
-            if (previous == null) {
-                front = next;
-            } else {
-                previous.setNext(next);
-            }
-            if (current == rear) {
-                rear = previous;
-            }
-            current = null;
-            canRemove = false;
-            count--;
-            modCount++;
-            iterModCount++;
-        }
+		public void remove() {
+			if (iterModCount != modCount) {
+				throw new ConcurrentModificationException();
+			}
+			if (!canRemove) {
+				throw new IllegalStateException();
+			}
+
+			if (previous == null) {
+				front = next;
+			} else {
+				previous.setNext(next);
+			}
+
+			if (current == rear) {
+				rear = previous;
+			}
+			current = null;
+			canRemove = false;
+			count--;
+			modCount++;
+			iterModCount++;
+		}
     }
 
     // IGNORE THE FOLLOWING CODE
