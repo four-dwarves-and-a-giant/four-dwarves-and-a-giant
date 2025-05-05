@@ -205,8 +205,6 @@ public class ListTester {
         testEmptyList(A_remove0_0, "A_remove0_0");
         // Scenario: 44
         testEmptyList(A_iterNextRemove, "A_iterNextRemove");
-        // Scenario: 66
-        testEmptyList(A_iterPreviousRemove_0, "A_iterPreviousRemove_0");
 
         //1-element to 2-element
         // Scenario: 06
@@ -241,8 +239,6 @@ public class ListTester {
         testSingleElementList(AB_iterNextRemove_B, "AB_iterNextRemove_B", LIST_B, STRING_B);
         // Scenario: 46
         testSingleElementList(AB_iterNextNextRemove_A, "AB_iterNextNextRemove_A", LIST_A, STRING_A);
-        // Scenario: 57
-        testSingleElementList(AB_iterNextRemove_A, "AB_iterNextRemove_A", LIST_A, STRING_A);
 
         //2-element to 3-element
         // Scenario: 17
@@ -278,13 +274,22 @@ public class ListTester {
         testTwoElementList(ABC_iterNextNextRemove_AC, "ABC_iterNextNextRemove_AC", LIST_AC, STRING_AC);
         // Scenario: 50
         testTwoElementList(ABC_iterNextNextNextRemove_AB, "ABC_iterNextNextNextRemove_AB", LIST_AB, STRING_AB);
-        // Scenario: 60
-        testTwoElementList(ABC_iterNextRemove_AC, "ABC_iterNextRemove_AC", LIST_AC, STRING_AC);
-        // Scenario 71
-        testTwoElementList(ABC_iterPreviousRemove_AC, "ABC_iterPreviousRemove_AC", LIST_AC, STRING_AC);
 
         //List Iterator Scenarios
         if (SUPPORTS_LIST_ITERATOR) {
+            //2-element changed to 1-element via remove()
+            // Scenario: 57
+            testSingleElementList(AB_iterNextRemove_A, "AB_iterNextRemove_A", LIST_A, STRING_A);
+
+            //1-element changed to empty list via remove()
+            // Scenario: 66
+            testEmptyList(A_iterPreviousRemove_0, "A_iterPreviousRemove_0");
+
+            //3-element changed to 2-element via remove()
+            // Scenario: 60
+            testTwoElementList(ABC_iterNextRemove_AC, "ABC_iterNextRemove_AC", LIST_AC, STRING_AC);
+            // Scenario 71
+            testTwoElementList(ABC_iterPreviousRemove_AC, "ABC_iterPreviousRemove_AC", LIST_AC, STRING_AC);
             //2-element changed to 3-element via add()
             // Scenario: 87
             testThreeElementList(AB_iterNextAddC_ACB, "AB_iterNextAddC_ACB", LIST_ACB, STRING_ACB);
