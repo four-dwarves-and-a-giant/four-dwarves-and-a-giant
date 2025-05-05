@@ -1,3 +1,4 @@
+
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
@@ -69,7 +70,7 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
             } else {
                 previous.setNext(newNode);
             }
-            if (current == null){
+            if (current == null) {
                 rear = newNode;
             }
         }
@@ -114,7 +115,7 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
 
         if (index == 0) {
             front = target.getNext();
-        } else if (target.getNext() != null){
+        } else if (target.getNext() != null) {
             target.getPrevious().setNext(target.getNext());
             target.getNext().setPrevious(target.getPrevious());
         } else {
@@ -197,10 +198,10 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
         }
         BidirectionalNode<E> temp;
         temp = front;
-            for (int i = 0; i < index; i++) {
-                temp = temp.getNext();
-            }
-        
+        for (int i = 0; i < index; i++) {
+            temp = temp.getNext();
+        }
+
         return temp;
     }
 
