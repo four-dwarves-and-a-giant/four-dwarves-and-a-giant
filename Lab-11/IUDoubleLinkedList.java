@@ -429,11 +429,17 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
 
         @Override
         public int nextIndex() {
+            if (listIterModCount != modCount) {
+                throw new ConcurrentModificationException();
+            }
             return cursor.getNextIndex();
         }
 
         @Override
         public int previousIndex() {
+            if (listIterModCount != modCount) {
+                throw new ConcurrentModificationException();
+            }
             return cursor.getPreviousIndex();
         }
 
@@ -455,34 +461,39 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
 
         @Override
         public void set(E e) {
+            if (listIterModCount != modCount) {
+                throw new ConcurrentModificationException();
+            }
             switch (lastReturned) {
                 case NEITHER:
                     throw new IllegalStateException();
                 default:
                     current.setElement(e);
             }
+            modCount++;
             listIterModCount++;
         }
 
         @Override
         public void add(E e) {
+            if (listIterModCount != modCount) {
+                throw new ConcurrentModificationException();
+            }
             BidirectionalNode<E> newNode = new BidirectionalNode<E>(e);
             switch (lastReturned) {
                 case NEXT:
-                    addBetween(newNode, current, current.getNext());
-                    cursor.getPreviousIndex();
-                    listIterModCount++;
                     break;
                 case PREVIOUS:
-                    addBetween(newNode, current, current.getNext());
-                    listIterModCount++;
+                    current = current.getPrevious();
                     break;
                 case NEITHER:
-
                     break;
                 default:
                     throw new AssertionError();
             }
+            addBetween(newNode, current, (current == null) ? null : current.getNext());
+            cursor.getPreviousIndex();
+            listIterModCount++;
             lastReturned = ListIteratorState.NEITHER;
         }
 
