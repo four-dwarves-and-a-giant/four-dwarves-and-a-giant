@@ -1,9 +1,16 @@
 import java.util.ConcurrentModificationException;
+
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import java.util.NoSuchElementException;
 
 public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
+
+    private enum ListIteratorState {
+        NEXT, PREVIOUS, NEITHER
+    }
     private BidirectionalNode<E> front, rear;
     private int count;
     private int modCount;
@@ -17,35 +24,32 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
     @Override
     public void addToFront(E element) {
         add(0, element);
-        add(0, element);
     }
 
     @Override
     public void addToRear(E element) {
         if (isEmpty()) {
-            front = rear = new BidirectionalNode<>(element);
+            addBetween(new BidirectionalNode<>(element), null, null);
         } else {
-            rear.setNext(new BidirectionalNode<>(element));
-            rear = rear.getNext();
+            addBetween(new BidirectionalNode<>(element), rear, null);
         }
-        count++;
-        modCount++;
-
     }
 
     @Override
     public void add(E element) {
         addToRear(element);
-        addToRear(element);
     }
 
     @Override
     public void addAfter(E element, E target) {
-        int i = indexOf(target);
-        if (i < 0) {
+        BidirectionalNode<E> newNode = new BidirectionalNode<E>(element);
+        BidirectionalNode<E> previous = findNode(target);
+        if (previous != null) {
+            BidirectionalNode<E> next = previous.getNext();
+            addBetween(newNode, previous, next);
+        } else {
             throw new NoSuchElementException();
         }
-        add(i + 1, element);
 
     }
 
@@ -54,40 +58,46 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
         if ((index < 0) || (index > size())) {
             throw new IndexOutOfBoundsException();
         }
-        BidirectionalNode<E> newNode = new BidirectionalNode<>(element);
-        if (isEmpty()) {
-            front = rear = newNode;
+        BidirectionalNode<E> newNode = new BidirectionalNode<E>(element);
+        if (index == 0) {
+            addBetween(newNode, null, front);
+        } else if (index == size()) {
+            addBetween(newNode, rear, null);
         } else {
-            BidirectionalNode<E> current = front;
-            BidirectionalNode<E> previous = null;
-            for (int i = 0; i < index; i++) {
-                if (current == null) {
-                    throw new InternalError();
-                }
-                previous = current;
-                current = current.getNext();
-            }
-            newNode.setNext(current);
-            if (previous == null) {
-                front = newNode;
-            } else {
-                previous.setNext(newNode);
-            }
-            if (current == null){
-                rear = newNode;
-            }
+            BidirectionalNode<E> previous = findNode(index - 1);
+            BidirectionalNode<E> next = previous.getNext();
+            addBetween(newNode, previous, next);
+        }
+    }
+
+    public void addBetween(BidirectionalNode<E> newNode, BidirectionalNode<E> previous, BidirectionalNode<E> next) {
+        if (previous == null && next == null) {
+            front = rear = newNode;
+        } else if (previous == null) {
+            newNode.setNext(front);
+            front.setPrevious(newNode);
+            front = newNode;
+        } else if (next == null) {
+            newNode.setPrevious(rear);
+            rear.setNext(newNode);
+            rear = newNode;
+        } else {
+            previous.setNext(newNode);
+            newNode.setPrevious(previous);
+            next.setPrevious(newNode);
+            newNode.setNext(next);
         }
         count++;
         modCount++;
+
     }
 
     @Override
     public E removeFirst() {
-        E first = first();
-        front = front.getNext();
-        count--;
-        modCount++;
-        return first;
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        return removeNode(front);
     }
 
     @Override
@@ -95,16 +105,12 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
-        return remove(count - 1);
+        return removeNode(rear);
     }
 
     @Override
     public E remove(E element) {
-        int i = indexOf(element);
-        if (i < 0) {
-            throw new NoSuchElementException();
-        }
-        return remove(i);
+        return removeNode(findNode(element));
     }
 
     @Override
@@ -115,17 +121,7 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
 
         BidirectionalNode<E> target = findNode(index);
         E result = target.getElement();
-
-        if (index == 0) {
-            front = target.getNext();
-        } else if (target.getNext() != null){
-            target.getPrevious().setNext(target.getNext());
-            target.getNext().setPrevious(target.getPrevious());
-        } else {
-            rear = target.getPrevious();
-        }
-        count--;
-        modCount++;
+        removeNode(target);
         return result;
     }
 
@@ -195,17 +191,51 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
         return result + "]";
     }
 
-    public BidirectionalNode<E> findNode(int index) {
+    private E removeNode(BidirectionalNode<E> node) {
+        if (node == null) {
+            throw new NoSuchElementException();
+        }
+        E retVal = node.getElement();
+        if (node.getNext() == null && node.getPrevious() == null) {
+            front = rear = null;
+        } else if (node.getNext() == null) {
+            rear = node.getPrevious();
+            rear.setNext(null);
+        } else if (node.getPrevious() == null) {
+            front = node.getNext();
+            front.setPrevious(null);
+        } else {
+            node = node.getPrevious();
+            node.setNext(node.getNext().getNext());
+            node.getNext().setPrevious(node);
+        }
+        count--;
+        modCount++;
+        return retVal;
+    }
+
+    private BidirectionalNode<E> findNode(int index) {
         if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException();
         }
         BidirectionalNode<E> temp;
         temp = front;
-            for (int i = 0; i < index; i++) {
-                temp = temp.getNext();
-            }
-        
+        for (int i = 0; i < index; i++) {
+            temp = temp.getNext();
+        }
+
         return temp;
+    }
+
+    public BidirectionalNode<E> findNode(E element) {
+        BidirectionalNode<E> temp = front;
+        while (temp != null) {
+            if (temp.getElement().equals(element)) {
+                return temp;
+            }
+            temp = temp.getNext();
+        }
+        throw new NoSuchElementException();
     }
 
     @Override
@@ -277,123 +307,183 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
     public ListIterator<E> listIterator(int startingIndex) {
         return new DoubleLinkedListListIterator(startingIndex);
     }
-    private class LinkedCursor {
-        private int virtualNextIndex;
 
-        public LinkedCursor(int nextVirtualIndex) {
-            if (nextVirtualIndex < 0 || nextVirtualIndex > count) {
+    private class LinkedCursor {
+
+        private int virtualIndex;
+
+        public LinkedCursor(int virtualIndex) {
+            if (virtualIndex < -1 || virtualIndex > count) {
                 throw new IndexOutOfBoundsException();
             }
-            this.virtualNextIndex = nextVirtualIndex;
+            this.virtualIndex = virtualIndex - 1;
         }
 
-        public int getVirtualNextIndex() {
-            return virtualNextIndex;
+        public int getPreviousIndex() {
+            return virtualIndex;
         }
 
-        public int getVirtualPreviousIndex() {
-            return virtualNextIndex - 1;
+        public int getNextIndex() {
+            return virtualIndex + 1;
         }
 
-        public void rightShift() {
-            if (virtualNextIndex < count) {
-                virtualNextIndex++;
-            }
+        public int previousIndex() {
+            int retVal = virtualIndex;
+            virtualIndex--;
+            return retVal;
         }
 
-        public void leftShift() {
-            if (virtualNextIndex > 0) {
-                virtualNextIndex--;
-            }
+        public int nextIndex() {
+            return virtualIndex++;
         }
-
     }
 
     private class DoubleLinkedListListIterator implements ListIterator<E> {
+
         private LinkedCursor cursor;
         private int listIterModCount;
         private BidirectionalNode<E> current;
-        private BidirectionalNode<E> lastReturned;
+        private ListIteratorState lastReturned;
 
-        private DoubleLinkedListListIterator() {
+        public DoubleLinkedListListIterator() {
             this(0);
         }
 
         public DoubleLinkedListListIterator(int nextVirtualIndex) {
             cursor = new LinkedCursor(nextVirtualIndex);
             listIterModCount = modCount;
-            // current = // How to get current?
-            lastReturned = null;
+            findIndex(nextVirtualIndex);
+            lastReturned = ListIteratorState.NEITHER;
+
+        }
+
+        private void findIndex(int i) {
+            if (i < 0 || i > size()) {
+                throw new IndexOutOfBoundsException(i);
+            }
+            if (i == 0) {
+                return;
+            }
+            i--;
+            if (i <= (size() / 2)) {
+                current = front;
+                for (int j = 0; i > j; j++) {
+                    current = current.getNext();
+                }
+            } else {
+                current = rear;
+                for (int j = size() - 1; i < j; j--) {
+                    current = current.getPrevious();
+                }
+            }
         }
 
         @Override
         public boolean hasNext() {
-            if (listIterModCount != modCount) { throw new ConcurrentModificationException(); }
-            return cursor.getVirtualNextIndex() < 0;
+            if (listIterModCount != modCount) {
+                throw new ConcurrentModificationException();
+            }
+            return cursor.getNextIndex() < size();
         }
 
         @Override
         public E next() {
-            if (!hasNext()) { throw new NoSuchElementException(); }
-            E item =  current.getElement();
-            lastReturned = current;
-            current = current.getNext();
-            cursor.rightShift();
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            if (current == null) {
+                current = front;
+            } else {
+                current = current.getNext();
+            }
+            E item = current.getElement();
+            lastReturned = ListIteratorState.NEXT;
+            cursor.nextIndex();
             return item;
         }
 
         @Override
         public boolean hasPrevious() {
-            if (listIterModCount != modCount) { throw new ConcurrentModificationException(); }
-            return cursor.getVirtualPreviousIndex() > -1;
+            if (listIterModCount != modCount) {
+                throw new ConcurrentModificationException();
+            }
+            return cursor.getPreviousIndex() >= 0;
         }
 
         @Override
         public E previous() {
-            if (!hasPrevious()) { throw new NoSuchElementException(); }
-            current = lastReturned = current.getPrevious();
-            E item = current.getElement();
-            cursor.leftShift();
-            return item;
+            if (!hasPrevious()) {
+                throw new NoSuchElementException();
+            }
+            switch (lastReturned) {
+                case PREVIOUS:
+                    current = current.getPrevious();
+                    break;
+            }
+            E retVal = current.getElement();
+
+            lastReturned = ListIteratorState.PREVIOUS;
+            cursor.previousIndex();
+            return retVal;
         }
 
         @Override
         public int nextIndex() {
-            return cursor.getVirtualNextIndex();
+            return cursor.getNextIndex();
         }
 
         @Override
         public int previousIndex() {
-            return cursor.getVirtualPreviousIndex();
+            return cursor.getPreviousIndex();
         }
 
         @Override
         public void remove() {
-            if (listIterModCount != modCount) { throw new ConcurrentModificationException(); }    
-            if (lastReturned == current) {
-                current = lastReturned.getNext();
-
-            } 
-            lastReturned.getPrevious().setNext(lastReturned.getNext());
+            if (listIterModCount != modCount) {
+                throw new ConcurrentModificationException();
+            }
+            switch (lastReturned) {
+                case NEITHER:
+                    throw new IllegalStateException();
+            }
+            removeNode(current);
+            lastReturned = ListIteratorState.NEITHER;
+            current = current.getPrevious();
+            cursor.previousIndex();
+            listIterModCount++;
         }
 
         @Override
         public void set(E e) {
-            BidirectionalNode<E> newNode = new BidirectionalNode<>(e);
-            lastReturned = newNode;
+            switch (lastReturned) {
+                case NEITHER:
+                    throw new IllegalStateException();
+                default:
+                    current.setElement(e);
+            }
+            listIterModCount++;
         }
 
         @Override
         public void add(E e) {
-            BidirectionalNode<E> newNode = new BidirectionalNode<>(e);
-            if (lastReturned != current) {
-                BidirectionalNode<E> temp = current.getNext();
-                newNode.setNext(temp);
-                newNode.setPrevious(current);
-            } else {
-                newNode.setNext(lastReturned);
-                newNode.setPrevious(lastReturned.getNext());
+            BidirectionalNode<E> newNode = new BidirectionalNode<E>(e);
+            switch (lastReturned) {
+                case NEXT:
+                    addBetween(newNode, current, current.getNext());
+                    cursor.getPreviousIndex();
+                    listIterModCount++;
+                    break;
+                case PREVIOUS:
+                    addBetween(newNode, current, current.getNext());
+                    listIterModCount++;
+                    break;
+                case NEITHER:
+
+                    break;
+                default:
+                    throw new AssertionError();
             }
+            lastReturned = ListIteratorState.NEITHER;
         }
 
     }

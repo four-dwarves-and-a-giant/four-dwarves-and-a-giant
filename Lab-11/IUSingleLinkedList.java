@@ -235,7 +235,6 @@ public class IUSingleLinkedList<E> implements IndexedUnsortedList<E> {
         private LinearNode<E> current;
         private LinearNode<E> next;
         private int iterModCount;
-        private boolean canRemove;
 
         /**
          * Creates a new iterator for the list
@@ -245,7 +244,6 @@ public class IUSingleLinkedList<E> implements IndexedUnsortedList<E> {
             current = null;
             next = front;
             iterModCount = modCount;
-            canRemove = false;
         }
 
         @Override
@@ -266,7 +264,6 @@ public class IUSingleLinkedList<E> implements IndexedUnsortedList<E> {
             }
             current = next;
             next = next.getNext();
-            canRemove = true;
             return current.getElement();
         }
 
@@ -287,7 +284,6 @@ public class IUSingleLinkedList<E> implements IndexedUnsortedList<E> {
                 rear = previous;
             }
             current = null;
-            canRemove = false;
             count--;
             modCount++;
             iterModCount++;
