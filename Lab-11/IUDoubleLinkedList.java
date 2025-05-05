@@ -1,3 +1,4 @@
+import java.text.Bidi;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.ListIterator;
@@ -207,8 +208,59 @@ public class IUDoubleLinkedList<E> implements IndexedUnsortedList<E> {
 
     @Override
     public Iterator<E> iterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
+        return new DoubleLinkedListIterator();
+    }
+
+    private class DoubleLinkedListIterator implements Iterator<E> {
+
+        private BidirectionalNode<E> previous;
+        private BidirectionalNode<E> current;
+        private BidirectionalNode<E> next;
+        private int iterModCount;
+
+        public DoubleLinkedListIterator() {
+            previous = null;
+            current = null;
+            next = front;
+            iterModCount = modCount;
+        }
+
+        public boolean hasNext() {
+            if (iterModCount != modCount) { throw new ConcurrentModificationException(); }
+            return next != null;
+        }
+
+        public E next() {
+            if (!hasNext()) { throw new NoSuchElementException(); }
+
+            if (current != null) {
+                previous = current;
+            }
+            current = next;
+            next = next.getNext();
+            return current.getElement();
+        }
+        
+        public void remove() {
+            if (iterModCount != modCount) {
+                throw new ConcurrentModificationException();
+            }
+            if (current == null) {
+                throw new IllegalStateException();
+            }
+            if (previous == null) {
+                front = next;
+            } else {
+                previous.setNext(next);
+            }
+            if (current == rear) {
+                rear = previous;
+            }
+            current = null;
+            count--;
+            modCount++;
+            iterModCount++;
+        }
     }
 
     @Override
