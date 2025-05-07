@@ -1,4 +1,3 @@
-
 import java.util.Comparator;
 import java.util.Iterator;
 
@@ -64,8 +63,8 @@ public class Sort {
             E pivot = list.last();
             list.removeLast();
             Iterator<E> it = list.iterator();
-            WrappedDLL<E> leftDLL = new WrappedDLL<>();
-            WrappedDLL<E> rightDLL = new WrappedDLL<>();
+            IndexedUnsortedList<E> leftDLL = newList();
+            IndexedUnsortedList<E> rightDLL = newList();
             while (it.hasNext()) {
                 E elementE = it.next();
                 it.remove();
@@ -104,8 +103,8 @@ public class Sort {
             E pivot = list.last();
             list.removeLast();
             Iterator<E> it = list.iterator();
-            WrappedDLL<E> leftDLL = new WrappedDLL<>();
-            WrappedDLL<E> rightDLL = new WrappedDLL<>();
+            IndexedUnsortedList<E> leftDLL = newList();
+            IndexedUnsortedList<E> rightDLL = newList();
             while (it.hasNext()) {
                 E elementE = it.next();
                 it.remove();
